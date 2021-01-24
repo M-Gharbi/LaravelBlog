@@ -1,5 +1,5 @@
 # Blog website
-This is my first Laravel application. I uses a project based approach for learning and I am building a blog application running on Laravel framework.
+This is my first Laravel application. Using Project-based learning approach, I will build a blog application running on Laravel framework.
 
 
 
