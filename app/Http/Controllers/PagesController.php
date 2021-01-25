@@ -13,7 +13,7 @@ class pagesController extends Controller
         $data['email']=$email;
         $data['fullname']=$fullname;        
 
-        return view('index')->withData($data);
+        return view('main')->withData($data);
     }
 
     public function getAbout() {
@@ -28,8 +28,15 @@ class pagesController extends Controller
         return view('about')->withData($data);
     }
 
-    public function getContact() {       
-        return view('contact');
+    public function getContact() {
+        $first= "Mohammed ";
+        $last= "Alshammari";
+
+        $fullname = $first."".$last;
+        $email="mohammed.gharbi@outlook.com";
+        $data['email']=$email;
+        $data['fullname']=$fullname;              
+        return view('contact')->withData($data);;
     }
 
 }
