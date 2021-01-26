@@ -1,5 +1,7 @@
 @extends('index')
 
+@section('title','Contact')
+
 @section('contant')
             <div class="content">
                 <div class="title m-b-md">

@@ -1,4 +1,7 @@
 @extends('index')
+
+@section('title','About')
+
 @section('contant')
 
     <div class="content">

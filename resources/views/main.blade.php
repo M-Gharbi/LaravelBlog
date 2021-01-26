@@ -1,5 +1,6 @@
 @extends('index')
-
+@section('title','Homepage')
+    
 @section('contant')
     <div class="container">
         <div class="row">
