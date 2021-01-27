@@ -39,4 +39,8 @@ class pagesController extends Controller
         return view('contact')->withData($data);;
     }
 
+    public function getPost() {                   
+        return view('post');
+    }
+
 }
