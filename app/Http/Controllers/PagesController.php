@@ -36,11 +36,12 @@ class pagesController extends Controller
         $email="mohammed.gharbi@outlook.com";
         $data['email']=$email;
         $data['fullname']=$fullname;              
-        return view('contact')->withData($data);;
+        return view('contact')->withData($data);
     }
 
-    public function getPost() {                   
-        return view('post');
+    public function getPost() {
+        $data = Post::find($id);
+        return view('post')->withData($data);
     }
 
 }
