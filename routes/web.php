@@ -51,3 +51,6 @@ Route::delete('/contacts/{id}', 'ContactController@destroy')->name('contacts.des
 
 //Route::resource('contacts','PostController');
 Route::resource('posts','PostController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
