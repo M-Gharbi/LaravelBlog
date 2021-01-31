@@ -26,12 +26,18 @@ Route::get('/post', 'PagesController@getPost($id)');
     return "<h1>All contacts</h1>";
 })->name('contacts.index');*/
 Route::get('/contacts', 'ContactController@index')->name('contacts.index');
+
+
+Route::post('/contacts', 'ContactController@store')->name('contacts.store');
+
+Route::get('/contacts/create', 'ContactController@create')->name('contacts.create');
+
 Route::get('/', 'PostController@index')->name('index');
 
 
-Route::get('/contacts/create', function () {
+/*Route::get('/contacts/create', function () {
     return "<h1>Add new contact</h1>";
-})->name('contacts.create');
+})->name('contacts.create');*/
 
 
 

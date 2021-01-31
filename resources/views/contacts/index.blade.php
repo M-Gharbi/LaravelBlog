@@ -1,6 +1,11 @@
 @extends('index')
 @section('title',"")
 @section('contant')
+
+<div class="ml-auto">
+<a href="{{ route('contacts.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add New</a>
+</div>
+@include('contacts._filter')
 <table class="table table-striped table-hover">
 
     <thead>
