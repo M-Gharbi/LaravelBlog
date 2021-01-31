@@ -3,3 +3,4 @@ document.getElementById('filter_post_id').addEventListener('change', function ()
     //window.location.href = window.location.href.split('?')[0] + '?post_id=' + postId
     alert(this.value)
 })
+

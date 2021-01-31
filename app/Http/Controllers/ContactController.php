@@ -11,15 +11,7 @@ class ContactController extends Controller
     public function index()
     {
         $posts = Post::orderBy('title')->pluck('title', 'id')->prepend('All post', '');
-        //$contacts = Contact::orderBy('first_name', 'asc')->where(function ($query) {
-        $contacts = Contact::orderBy('id', 'desc')->where(function ($query) {
-            if ($postId = request('post_id')) {
-                $query->where('post_id', $postId);
-            }
-        })->paginate(30);
-        //$post = Post::orderBy('title')->pluck('title', 'id');
-        //$contacts = Contact::orderBy('first_name', 'asc')->paginate(20);
-      
+        $contacts = Contact::latestFirst()->filter()->paginate(10);
 
         return view('contacts.index', compact('contacts', 'posts'));
     }
@@ -36,7 +28,6 @@ class ContactController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request->except('first_name', 'last_name'));
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -87,9 +78,7 @@ class ContactController extends Controller
 
     public function show($id)
     {
-        //$data = Contact::find($id);
         $data = Contact::findOrFail($id);
-        //return view('showContact', compact('contact'));
         return view('contacts.showContact')->withData($data);
 
     }
