@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Scopes\FilterScope;
+use App\Scopes\SearchScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
@@ -17,16 +19,12 @@ class Contact extends Model
         return $query->orderBy('id', 'desc');
     }
     
-    public function scopeFilter($query)
+
+    protected static function boot()
     {
-        if ($postId = request('post_id')) {
-            $query->where('post_id', $postId);
-        }
-
-        if ($search = request('search')) {
-            $query->where('first_name', 'LIKE', "%{$search}%");
-        }
-
-        return $query;
+        parent::boot();
+        
+        static::addGlobalScope(new FilterScope);
+        static::addGlobalScope(new SearchScope);
     }
 }

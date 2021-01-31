@@ -11,8 +11,8 @@ class ContactController extends Controller
     public function index()
     {
         $posts = Post::orderBy('title')->pluck('title', 'id')->prepend('All post', '');
-        $contacts = Contact::latestFirst()->filter()->paginate(10);
-
+       // $contacts = Contact::latestFirst()->filter()->paginate(10);
+        $contacts = Contact::latestFirst()->paginate(30);
         return view('contacts.index', compact('contacts', 'posts'));
     }
 
