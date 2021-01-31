@@ -19,7 +19,9 @@
       </tr>
     </thead>
     <tbody>
-
+  @if ($message = session('message'))
+      <div class="alert alert-success">{{ $message }}</div>
+  @endif
 @if ($contacts->count())
     @foreach ($contacts as $index => $contact)
         <tr>
@@ -30,9 +32,16 @@
             <td>{{ $contact->post->title }}</td>
             <td width="150">
             <a href="{{ route('contacts.show', $contact->id) }}" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a>
-            </td>
+            <a href="{{ route('contacts.edit', $contact->id) }}" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></a>  
+            <a href="{{ route('contacts.destroy', $contact->id) }}" class="btn-delete btn btn-sm btn-circle btn-outline-danger" title="Delete"><i class="fa fa-times"></i></a>  
+          </td>
         </tr>
     @endforeach
+
+    <form id="form-delete" method="POST" style="display: none">
+        @csrf
+        @method('DELETE')
+    </form> 
 @endif
 </tbody>
 
