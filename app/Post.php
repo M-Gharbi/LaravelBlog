@@ -8,9 +8,12 @@ class Post extends Model
 {
     protected $fillable = ['title','body'];
 
-        public function contacts()
+    public function contacts()
     {
         return $this->hasMany(Contact::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
 }

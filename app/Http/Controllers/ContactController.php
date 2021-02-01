@@ -5,23 +5,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contact;
 use App\Post;
+use Auth;
 
 class ContactController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
     public function index()
     {
-        $posts = Post::orderBy('title')->pluck('title', 'id')->prepend('All post', '');
-       // $contacts = Contact::latestFirst()->filter()->paginate(10);
-        $contacts = Contact::latestFirst()->paginate(30);
+        $user = auth()->user();
+        //$companies = $user->companies()->orderBy('name')->pluck('name', 'id')->prepend('All Companies', '')
+        $posts = $user->posts()->orderBy('title')->pluck('title', 'id')->prepend('All post', '');
+       // $contacts = Contact::latestFirst()->filter()->paginate(30);
+        $contacts = $user->contacts()->latestFirst()->paginate(30);
         return view('contacts.index', compact('contacts', 'posts'));
     }
 
+    // Show create page with options only.
     public function create()
     {
         $contact = new Contact();
-        $post = Post::orderBy('title')->pluck('title', 'id')->prepend('All Post', '');
-
-        return view('contacts.create', compact('post', 'contact'));
+        $user = auth()->user();
+        $post = Post::where('user_id',$user->id)->orderBy('title')->select('id','title')->get();
+        return view('contacts.create', compact('post','contact'));
 
 
     }
@@ -36,7 +44,7 @@ class ContactController extends Controller
             'post_id' => 'required|exists:posts,id',
         ]);
 
-        Contact::create($request->all());
+        $request->user()->contacts()->create($request->all());
 
         return redirect()->route('contacts.index')->with('message', "Contact has been added successfully");
    
@@ -46,13 +54,14 @@ class ContactController extends Controller
     public function edit($id)
     {
         $contact = Contact::findOrFail($id);
-        $post = Post::orderBy('title')->pluck('title', 'id')->prepend('All Post', '');
+        $post = auth()->user()->posts()->orderBy('title')->pluck('title', 'id')->prepend('All Post', '');
 
         return view('contacts.edit', compact('post', 'contact'));
     }
 
     public function update($id, Request $request)
     {
+        //dd($request->user());
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -78,6 +87,7 @@ class ContactController extends Controller
 
     public function show($id)
     {
+
         $data = Contact::findOrFail($id);
         return view('contacts.showContact')->withData($data);
 

@@ -14,9 +14,48 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="the-navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="{{ url('/') }}">Blog</a></li>
-            <li><a href="{{ url('/about') }}">About</a></li>
-            <li><a href="{{ url('/contact') }}">Contact</a></li>
+            @auth
+                
+            <li class=""><a href="{{ url('/') }}">Blog</a></li>
+            
+            
+            <li class="nav-item"><a href="{{ route('contacts.index') }}" class="nav-link">Contacts</a></li>
+
+            @endauth
+
+            @guest
+            
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+              </li>
+            @if (Route::has('register'))
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+              </li>
+            @endif
+
+            @else
+            <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                  {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
+
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                    </form>
+                </div>
+            </li>
+        @endguest
+        <li><a href="{{ url('/about') }}">About</a></li>
+
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->

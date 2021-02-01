@@ -1,13 +1,15 @@
-@extends('layouts.app')
+@extends('index')
 
-@section('content')
+@section('contant')
+
+<meta http-equiv="refresh" content="5; URL={{ url('/') }}" />
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
-                <div class="card-body">
+                <div class="card-body by-5">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}

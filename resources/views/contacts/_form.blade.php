@@ -63,8 +63,8 @@
         <label for="post_id" class="col-md-3 col-form-label">Post</label>
         <div class="col-md-9">
           <select name="post_id" id="post_id" class="form-control @error('post_id') is-invalid @enderror">
-            @foreach ($post as $id => $title)
-                <option {{ $id === old('post_id', $contact->post_id) ? 'selected' : '' }} value="{{ $id }}">{{ $title }}</option>
+            @foreach ($post as $singl_post)
+                <option {{ $singl_post->id === old('post_id', $singl_post->id) ? 'selected' : '' }} value="{{ $singl_post->id }}">{{ $singl_post->title }}</option>
             @endforeach
           </select>
           @error('post_id')
