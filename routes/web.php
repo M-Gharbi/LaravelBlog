@@ -11,22 +11,13 @@
 |
 */
 
-//Route::get('/', 'PagesController@getIndex');
-
 Route::get('/about', 'PagesController@getAbout');
 
 Route::get('/contact', 'PagesController@getContact');
 
-//Route::get('/contacts', 'PagesController@getContacts');
-
-
 Route::get('/post', 'PagesController@getPost($id)');
 
-/*Route::get('/contacts', function () {
-    return "<h1>All contacts</h1>";
-})->name('contacts.index');*/
 Route::get('/contacts', 'ContactController@index')->name('contacts.index')->middleware('auth');
-
 
 Route::post('/contacts', 'ContactController@store')->name('contacts.store')->middleware('auth');
 
@@ -34,14 +25,9 @@ Route::get('/contacts/create', 'ContactController@create')->name('contacts.creat
 
 Route::get('/', 'PostController@index')->name('index');
 
-
-/*Route::get('/contacts/create', function () {
-    return "<h1>Add new contact</h1>";
-})->name('contacts.create');*/
+Route::get('/settings/account', 'Settings\AccountController@index');
 
 Auth::routes(['verify' => true]);
-
-Route::get('/settings/account', 'Settings\AccountController@index');
 
 Route::get('/contacts/{id}', 'ContactController@show')->name('contacts.show')->middleware('auth');
 
@@ -51,7 +37,10 @@ Route::get('/contacts/{id}/edit', 'ContactController@edit')->name('contacts.edit
 
 Route::delete('/contacts/{id}', 'ContactController@destroy')->name('contacts.destroy')->middleware('auth');
 
-//Route::resource('contacts','PostController');
 Route::resource('posts','PostController');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
