@@ -16,4 +16,9 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    public static function userPosts()
+    {
+        return self::where('user_id', auth()->id())->orderBy('title')->pluck('title', 'id')->prepend('All Post', '');
+    }
+
 }

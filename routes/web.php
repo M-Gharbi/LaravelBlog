@@ -17,11 +17,45 @@ Route::get('/contact', 'PagesController@getContact');
 
 Route::get('/post', 'PagesController@getPost($id)');
 
-Route::get('/contacts', 'ContactController@index')->name('contacts.index')->middleware('auth');
+/*Route::get('/contacts', 'ContactController@index')->name('contacts.index');
 
-Route::post('/contacts', 'ContactController@store')->name('contacts.store')->middleware('auth');
+Route::post('/contacts', 'ContactController@store')->name('contacts.store');
 
-Route::get('/contacts/create', 'ContactController@create')->name('contacts.create')->middleware('auth');
+Route::get('/contacts/create', 'ContactController@create')->name('contacts.create');
+
+Route::get('/contacts/{contact}', 'ContactController@show')->name('contacts.show');
+
+Route::put('/contacts/{contact}', 'ContactController@update')->name('contacts.update');
+
+Route::get('/contacts/{contact}/edit', 'ContactController@edit')->name('contacts.edit');
+
+Route::delete('/contacts/{contact}', 'ContactController@destroy')->name('contacts.destroy');*/
+
+//Route::resource('contacts','ContactController');
+
+// Route::resource('/contacts', 'ContactController')->only(['create', 'store', 'edit', 'update', 'destroy']);
+
+// Route::resource('/contacts', 'ContactController')->except(['index', 'show']);
+
+//Route::apiResource('/contacts','ContactController');
+
+// Route::resource('/contacts', 'ContactController')->parameters([
+//     'contacts' => 'kontak',
+// ]);
+// Route::resource('/contacts', 'ContactController')->names([
+//     'index' => 'contacts.all',
+//     'show' => 'contacts.view'
+// ]);
+// Route::resource('/companies.contacts', 'ContactController');
+// Route::resource('/contacts', 'ContactController')->only(['create', 'store', 'edit', 'update', 'destroy']);
+// Route::resource('/contacts', 'ContactController')->except(['index', 'show']);
+
+
+Route::resources([
+    '/contacts' => 'ContactController',
+    '/posts' => 'PostController',
+]);
+
 
 Route::get('/', 'PostController@index')->name('index');
 
@@ -29,15 +63,9 @@ Route::get('/settings/account', 'Settings\AccountController@index');
 
 Auth::routes(['verify' => true]);
 
-Route::get('/contacts/{id}', 'ContactController@show')->name('contacts.show')->middleware('auth');
 
-Route::put('/contacts/{id}', 'ContactController@update')->name('contacts.update')->middleware('auth');
 
-Route::get('/contacts/{id}/edit', 'ContactController@edit')->name('contacts.edit')->middleware('auth');
-
-Route::delete('/contacts/{id}', 'ContactController@destroy')->name('contacts.destroy')->middleware('auth');
-
-Route::resource('posts','PostController');
+//Route::resource('posts','PostController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
