@@ -49,7 +49,7 @@
                   <div class="form-group row">
                     <label for="post_id" class="col-md-3 col-form-label">Post</label>
                     <div class="col-md-9">
-                      <p class="form-control-plaintext text-muted">{{ $contact->post->email }}</p>
+                      <p class="form-control-plaintext text-muted">{{ $contact->post->title }}</p>
                     </div>
                   </div>
                   <hr>

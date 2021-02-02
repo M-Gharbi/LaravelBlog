@@ -59,7 +59,11 @@ Route::resources([
 
 Route::get('/', 'PostController@index')->name('index');
 
-Route::get('/settings/account', 'Settings\AccountController@index');
+Route::get('/settings/account', 'Settings\AccountController@index')->name('password.confirm');
+
+Route::get('/settings/profile', 'Settings\ProfileController@edit')->name('settings.profile.edit');
+
+Route::put('/settings/profile', 'Settings\ProfileController@update')->name('settings.profile.update');
 
 Auth::routes(['verify' => true]);
 
