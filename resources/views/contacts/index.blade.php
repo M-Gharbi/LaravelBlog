@@ -46,6 +46,8 @@
 </tbody>
 
 </table> 
+{{ $contacts->appends(request()->only('post_id', 'search'))->links() }}
+
 </div>
 
 </div>

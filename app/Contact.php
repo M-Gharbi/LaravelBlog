@@ -15,7 +15,7 @@ class Contact extends Model
 
     public function Post()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Post::class)->withoutGlobalScopes();
     }
 
     public function user(){

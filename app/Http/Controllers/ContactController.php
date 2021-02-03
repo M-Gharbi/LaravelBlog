@@ -22,9 +22,10 @@ class ContactController extends Controller
        // $contacts = Contact::latestFirst()->filter()->paginate(30);
         //$contacts = $user->contacts()->latestFirst()->paginate(30);
 
-        $posts = Post::userPosts();
-
-        $contacts = auth()->user()->contacts()->latestFirst()->paginate(10);
+        //$posts = Post::userPosts();
+        $posts = Post::orderBy('title')->pluck('title', 'id')->prepend('All post', '');
+        $contacts = Contact::latestFirst()->paginate(10);
+        //$contacts = auth()->user()->contacts()->latestFirst()->paginate(10);
 
         return view('contacts.index', compact('contacts', 'posts'));
     }
@@ -37,7 +38,9 @@ class ContactController extends Controller
         $post = Post::where('user_id',$user->id)->orderBy('title')->select('id','title')->get();
         return view('contacts.create', compact('post','contact')); */
         $contact = new Contact();
-        $posts = Post::userPosts();
+        $posts = Post::orderBy('title')->pluck('title', 'id')->prepend('All post', '');
+
+        //$posts = Post::userPosts();
         return view('contacts.create', compact('posts','contact'));
     }
 
@@ -52,7 +55,8 @@ class ContactController extends Controller
     public function edit(Contact $contact)
     {
         //$post = auth()->user()->posts()->orderBy('title')->pluck('title', 'id')->prepend('All Post', '');
-        $posts = Post::userPosts();
+        //$posts = Post::userPosts();
+        $posts = Post::orderBy('title')->pluck('title', 'id')->prepend('All post', '');
 
         return view('contacts.edit', compact('posts', 'contact'));
     }

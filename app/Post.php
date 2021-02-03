@@ -10,7 +10,7 @@ class Post extends Model
 
     public function contacts()
     {
-        return $this->hasMany(Contact::class);
+        return $this->hasMany(Contact::class)->withoutGlobalScope(SearchScope::class);;
     }
     public function user(){
         return $this->belongsTo(User::class);
